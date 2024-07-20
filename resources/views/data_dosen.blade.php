@@ -33,10 +33,10 @@
               <select id="filter-filter" class="form-control">
                 <option value="">Filter</option>
               </select><br>
-              
+
             </div> -->
           </div>
-        
+
           <table id="example" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
@@ -58,9 +58,9 @@
                 </tr>
             </thead>
             <tbody>
-          
+
                 @foreach ($dbdosen as $data)
-          
+
                 <tr>
                   <td>{{ $data -> id }}</td>
                   <td>{{ $data -> nama }}</td>
@@ -93,32 +93,15 @@
                     Delete
                   </button>
                   </td>
-          
+
                 </tr>
-          
+
                 @endforeach
-          
+
             </tbody>
-            <tfoot>
-                <tr>
-                  <th>Id</th>
-                  <th>Nama</th>
-                  <th>NIP</th>
-                  <th>Gelar Depan</th>
-                  <th>Gelar Belakang</th>
-                  <th>Jabatan</th>
-                  <th>No Telp</th>
-                  <th>Mata Kuliah</th>
-                  <th>Fakultas</th>
-                  <th>Jurusan</th>
-                  <th>Semester</th>
-                  <th>Foto Dosen</th>
-                  <th>Status</th>
-                  <th>Action<th>
-                </tr>
-            </tfoot>
+
           </table>
-          
+
           @foreach ($dbdosen as $data)
           <div class="modal modal-danger fade" id="delete{{ $data->id }}">
                 <div class="modal-dialog modal-sm">
@@ -160,7 +143,7 @@
       } );
 
 </script>
- 
 
-    
+
+
 @endsection

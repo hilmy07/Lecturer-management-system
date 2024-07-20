@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDbdosenTable extends Migration
+class Dbdosenlb extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDbdosenTable extends Migration
      */
     public function up()
     {
-        Schema::create('dbdosen', function (Blueprint $table) {
+        Schema::create('dbdosenlb', function (Blueprint $table) {
             $table->id();
             $table->string('nama',50);
             $table->string('nip',15);
@@ -37,7 +37,7 @@ class CreateDbdosenTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('dbdosen', function (Blueprint $table) {
+        Schema::table('dbdosenlb', function (Blueprint $table) {
             $table->foreign('fakultas')->references('id')->on('dbfakultas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('jurusan')->references('id')->on('dbjurusan')->onDelete('cascade')->onUpdate('cascade');
         });
@@ -50,6 +50,6 @@ class CreateDbdosenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dbdosen');
+        Schema::dropIfExists('dbdosenlb');
     }
 }

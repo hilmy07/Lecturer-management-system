@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label><strong>Mata Kuliah</strong></label><br> 
+                    <label><strong>Mata Kuliah</strong></label><br>
                     <label><input type="checkbox" name="mata_kuliah1" value="-Pendidikan Agama" @if(old('mata_kuliah1', $data_dosen->mata_kuliah1)) checked @endif>Pendidikan Agama</label><br>
 
                     <label><input type="checkbox" name="mata_kuliah2" value="-Bahasa Indonesia"  @if(old('mata_kuliah2', $data_dosen->mata_kuliah2)) checked @endif  >Bahasa indonesia</label><br>
@@ -90,10 +90,10 @@
                     <label><input type="checkbox" name="mata_kuliah6" value="-Pendidikan Pancasila" @if(old('mata_kuliah6', $data_dosen->mata_kuliah6)) checked @endif  >Pendidikan Pancasila</label><br>
 
                     <label><input type="checkbox" name="mata_kuliah7" value="-Pendidikan Kewarganegaraan" @if(old('mata_kuliah7', $data_dosen->mata_kuliah7)) checked @endif  >Kewarganegaraan</label><br>
-                    
+
                     <label><input type="checkbox" name="mata_kuliah8" value="-Kepemimpinan" @if(old('mata_kuliah8', $data_dosen->mata_kuliah8)) checked @endif  >Kepemimpinan</label><br>
-                        
-                </div>  
+
+                </div>
 
 
                 <div class="form-group">
@@ -102,13 +102,13 @@
                     <select type="text" id="fakultas" name="fakultas" value="{{ $data_dosen->fakultas }}" class="form-control" style="width: 100%;">
 
                       <option value="">- Pilih --</option>
-                      
-                      @foreach ($dbfakultas as $item)
-                      <option value="{{$item->id}}" {{$item->id == $data_dosen->id ? 'selected' : ''}} >{{$item->nama_fakultas}}</option>    
-                      @endforeach
-                      
 
-                    </select> 
+                      @foreach ($dbfakultas as $item)
+                      <option value="{{$item->id}}" {{$item->id == $data_dosen->id ? 'selected' : ''}} >{{$item->nama_fakultas}}</option>
+                      @endforeach
+
+
+                    </select>
 
 
 
@@ -126,13 +126,13 @@
                     <select type="text" id="jurusan" name="jurusan" value="{{ $data_dosen->jurusan }}" class="form-control" style="width: 100%;">
 
                       <option value="">- Pilih --</option>
-                      
-                      @foreach ($dbjurusan as $item)
-                      <option value="{{$item->id}}" {{$item->id == $data_dosen->id ? 'selected' : ''}}>{{$item->nama_jurusan}}</option>    
-                      @endforeach
-                      
 
-                    </select> 
+                      @foreach ($dbjurusan as $item)
+                      <option value="{{$item->id}}" {{$item->id == $data_dosen->id ? 'selected' : ''}}>{{$item->nama_jurusan}}</option>
+                      @endforeach
+
+
+                    </select>
 
                     <div class="text-danger">
                         @error('jurusan')

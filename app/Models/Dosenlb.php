@@ -2,33 +2,32 @@
 
 namespace App\Models;
 
-use App\Exports\DosenExport;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Dosen extends Model
+class Dosenlb extends Model
 {
-    protected $table = 'dbdosen';
+    protected $table = 'dbdosenlb';
     protected $primaryKey = 'id';
     protected $fillable = ['id','nama', 'mata_kuliah'];
 
     public function detailData($id)
     {
-        return DB::table('dbdosen')->where('id', $id)->first();
+        return DB::table('dbdosenlb')->where('id', $id)->first();
 
     }
 
     public function editData($id, $data)
     {
-        DB::table('dbdosen')
+        DB::table('dbdosenlb')
         ->where('id', $id)
         ->update($data);
     }
 
     public function deleteData($id)
     {
-        DB::table('dbdosen')
+        DB::table('dbdosenlb')
         ->where('id', $id)
         ->delete();
     }
@@ -44,27 +43,11 @@ class Dosen extends Model
 
     public function allData()
     {
-        return DB::table('dbdosen')->get();
+        return DB::table('dbdosenlb')->get();
     }
 
     public function addData($data)
     {
-        DB::table('dbdosen')->insert($data);
-    }
-
-}
-
-class Post extends Model
-{
-    protected $fillable = ['name','mata_kuliah'];
-
-    public function setCategoryAttribute($value)
-    {
-        $this->attributes['mata_kuliah'] = json_encode($value);
-    }
-
-    public function getCategoryAttribute($value)
-    {
-        return $this->attributes['mata_kuliah'] = json_decode($value);
+        DB::table('dbdosenlb')->insert($data);
     }
 }

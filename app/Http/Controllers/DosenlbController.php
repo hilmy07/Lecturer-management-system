@@ -2,143 +2,148 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosenlb;
+use App\Models\Jurusan;
+use App\Models\Fakultas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DosenlbExport;
 
 class DosenlbController extends Controller
 {
-    public function home(){
-        $datalb = array(
-            'menu' => 'home',
-            'submenu' => ''
-        );
-        return view('home_admin', $datalb);
-    }
-    
-    public function indexDosen(){
-        $dosen = DB::table('dbdosenlb')
-        ->get();
-        $datalb = array(
-            'menu' => ' ',
-            'submenu' => ' ',
-            'dosen' => $dosen
-        );
-        return view('data_dosenlb', $datalb);
+    protected $Dosenlb;
+    public function __construct()
+    {
+        $this->Dosenlb = new Dosenlb();
+        $this->middleware('auth');
     }
 
-    public function view_dosen($nip)
+    public function index()
     {
-        $dosenlb = DB::table('dbdosenlb')->where('nip', $nip)->get();
-        $data = array(
-            'menu' => '',
-            'submenu' => '',
-            'dosen' => $dosenlb
-        );
-        return view('view_dosenlb', $data);
-    }
-    
-    public function edit_dosenlb($nip)
-    {
-        $dosen = DB::table('dbdosenlb')->where('nip', $nip)->get();
-        $data = array(
-            'menu' => '',
-            'submenu' => '',
-            'dosen' => $dosen
-        );
-        return view('edit_dosenlb', $data);
+        $dbdosenlb = Dosenlb::with('my_fakultas', 'my_jurusan')->get();
+        return view('data_dosenlb', compact('dbdosenlb'));
     }
 
-    public function update_dosenlb(Request $request)
+    public function add()
     {
-        $this->validate($request, [
+        $dbfakultas = Fakultas::all();
+        $dbjurusan = Jurusan::all();
+        return view('tambah_dosenlb', compact('dbjurusan', 'dbfakultas'));
+    }
+
+    public function insert(Request $request)
+    {
+
+        $input = $request->all();
+        $input['mata_kuliah'] = $request->input('mata_kuliah');
+
+        Request()->validate([
             'nama' => 'required',
-            'nip' => 'required',
-            // 'gelar_depan' => 'required',
-            // 'gelar_belakang' => 'required',
+            'nip' => 'required|unique:dbdosen,nip',
             'no_telepon' => 'required',
-            // 'mata_kuliah' => 'required',
             'fakultas' => 'required',
             'jurusan' => 'required',
             'semester' => 'required',
             'status' => 'required',
-            ]);
+        ], [
+            'nama.required' => 'Nama wajib diisi',
+            'nip.required' => 'nip Fakultas wajib diisi',
+            'no_telepon.required' => 'no_telepon Fakultas wajib diisi',
 
-            if($request->has('foto_dosen')) {
-                $image = $request->file('foto_dosen');
-                $filename = $image->getClientOriginalName();
-                $image->move(public_path('foto_dosen'), $filename);
-                $service->image = $request->file('foto_dosen')->getClientOriginalName();
-            }
-        // $file = Request()->foto_dosen;
-        // $fileName = Request()->nip .'.' . $file->extension();
-        // $file->move(public_path('foto_dosen'), $fileName);
-
-        // DB::table('dbdosenlb')->insert([
-        //     'foto_dosen' => $fileName,
-        // ]);
-
-        DB::table('dbdosenlb')->where('nip', $request->nip)->update([
-            'nama' => $request->nama,
-            'gelar_depan' => $request->gelar_depan,
-            'gelar_belakang' => $request->gelar_belakang,
-            'jabatan' => $request->jabatan,
-            'no_telepon' => $request->no_telepon,
-            'mata_kuliah1' => $request->mata_kuliah1,   
-            'mata_kuliah2' => $request->mata_kuliah2,    
-            'mata_kuliah3' => $request->mata_kuliah3, 
-            'mata_kuliah4' => $request->mata_kuliah4, 
-            'mata_kuliah5' => $request->mata_kuliah5, 
-            'mata_kuliah6' => $request->mata_kuliah6, 
-            'mata_kuliah7' => $request->mata_kuliah7, 
-            'mata_kuliah8' => $request->mata_kuliah8,
-            'fakultas' => $request->fakultas,
-            'jurusan' => $request->jurusan,
-            'semester' => $request->semester,
-            
-            'status' => $request->status,
+            'fakultas.required' => 'fakultas Fakultas wajib diisi',
+            'jurusan.required' => 'jurusan Fakultas wajib diisi',
+            'semester.required' => 'semester Fakultas wajib diisi',
+            'status.required' => 'status Fakultas wajib diisi',
         ]);
-        return redirect('/data_dosenlb');
-    }
-
-    public function form(){
-        return view('tambah_dosenlb');
-    }
-
-    public function tambahDosen(Request $post){
 
         $file = Request()->foto_dosen;
-        $fileName = Request()->nip .'.' . $file->extension();
+        $fileName = Request()->nip . '.' . $file->extension();
         $file->move(public_path('foto_dosen'), $fileName);
 
-        DB::table('dbdosenlb')->insert([
-            'nama' => $post->nama,
-            'nip' => $post->nip,
-            'gelar_depan' => $post->gelar_depan,
-            'gelar_belakang' => $post->gelar_belakang,
-            'jabatan' => $post->jabatan,
-            'no_telepon' => $post->no_telepon,
-            'mata_kuliah1' => $post->mata_kuliah1,   
-            'mata_kuliah2' => $post->mata_kuliah2,    
-            'mata_kuliah3' => $post->mata_kuliah3, 
-            'mata_kuliah4' => $post->mata_kuliah4, 
-            'mata_kuliah5' => $post->mata_kuliah5, 
-            'mata_kuliah6' => $post->mata_kuliah6, 
-            'mata_kuliah7' => $post->mata_kuliah7, 
-            'mata_kuliah8' => $post->mata_kuliah8,
-            'fakultas' => $post->fakultas,
-            'jurusan' => $post->jurusan,
-            'semester' => $post->semester,
+        $data = [
+            'nama' => Request()->nama,
+            'nip' => Request()->nip,
+            'gelar_depan' => Request()->gelar_depan,
+            'gelar_belakang' => Request()->gelar_belakang,
+            'jabatan' => Request()->jabatan,
+            'no_telepon' => Request()->no_telepon,
+            'mata_kuliah1' => Request()->mata_kuliah1,
+            'mata_kuliah2' => Request()->mata_kuliah2,
+            'mata_kuliah3' => Request()->mata_kuliah3,
+            'mata_kuliah4' => Request()->mata_kuliah4,
+            'mata_kuliah5' => Request()->mata_kuliah5,
+            'mata_kuliah6' => Request()->mata_kuliah6,
+            'mata_kuliah7' => Request()->mata_kuliah7,
+            'fakultas' => Request()->fakultas,
+            'jurusan' => Request()->jurusan,
+            'semester' => Request()->semester,
             'foto_dosen' => $fileName,
-            'status' => $post->status,
-        ]);
-
-        return redirect('/data_dosenlb');
-
+            'status' => Request()->status,
+        ];
+        $this->Dosenlb->addData($data,);
+        return redirect()->route('data_dosenlb')->with('pesan', 'Data Berhasil Ditambahkan');
     }
 
-    public function delete($nip)
+    public function edit($id)
     {
-        DB::table('dbdosenlb')->where('nip', $nip)->delete();
-        return redirect('/data_dosenlb')->with('status', 'Data Siswa Berhasil DiHapus');
+        if (!$this->Dosenlb->detailData($id)){
+            abort(404);
+        }
+
+        $data = [
+            'data_dosenlb' => $this->Dosenlb->detailData($id),
+        ];
+        $dbfakultas = Fakultas::all();
+        $dbjurusan = Jurusan::all();
+        return view('edit_dosenlb', compact('dbfakultas','dbjurusan'), $data);
+    }
+
+
+    public function update($id)
+    {
+        Request()->validate([
+            'nip' => 'required',
+            'no_telepon' => 'required',
+            'fakultas' => 'required',
+            'jurusan' => 'required',
+            'semester' => 'required',
+            'status' => 'required',
+        ]);
+
+        $data = [
+            'nama' => Request()->nama,
+            'nip' => Request()->nip,
+            'gelar_depan' => Request()->gelar_depan,
+            'gelar_belakang' => Request()->gelar_belakang,
+            'jabatan' => Request()->jabatan,
+            'no_telepon' => Request()->no_telepon,
+            'mata_kuliah1' => Request()->mata_kuliah1,
+            'mata_kuliah2' => Request()->mata_kuliah2,
+            'mata_kuliah3' => Request()->mata_kuliah3,
+            'mata_kuliah4' => Request()->mata_kuliah4,
+            'mata_kuliah5' => Request()->mata_kuliah5,
+            'mata_kuliah6' => Request()->mata_kuliah6,
+            'mata_kuliah7' => Request()->mata_kuliah7,
+            'fakultas' => Request()->fakultas,
+            'jurusan' => Request()->jurusan,
+            'semester' => Request()->semester,
+            // 'foto_dosen' => Request()->foto_dosen,
+            'status' => Request()->status,
+        ];
+
+        $this->Dosenlb->editData($id, $data);
+        return redirect()->route('data_dosenlb')->with('pesan', 'Data Berhasil Diupdate');
+    }
+
+    public function delete($id)
+    {
+        $this->Dosenlb->deleteData($id);
+        return redirect()->route('data_dosenlb')->with('pesan', 'Data Berhasil Dihapus');
+    }
+
+    public function export()
+    {
+        return Excel::download(new DosenlbExport, 'dosenlb.xlsx');
     }
 }
