@@ -36,7 +36,7 @@ Route::get('/data_jurusan/delete/{id}', [JurusanController::class, 'delete']);
 Route::get('/data_dosen', [DosenController::class, 'index'])->name('data_dosen');
 Route::get('/data_dosen/add', [DosenController::class, 'add']);
 Route::post('/data_dosen/insert', [DosenController::class, 'insert']);
-Route::get('/data_dosen/edit{id}', [DosenController::class, 'edit']);
+Route::get('/data_dosen/edit/{id}', [DosenController::class, 'edit']);
 Route::post('/data_dosen/update/{id}', [DosenController::class, 'update']);
 Route::get('/data_dosen/delete/{id}', [DosenController::class, 'delete']);
 Route::get('data_dosen/export', function() {
@@ -47,7 +47,7 @@ Route::get('data_dosen/export', function() {
 Route::get('/data_dosenlb', [DosenlbController::class, 'index'])->name('data_dosenlb');
 Route::get('/tambah_dosenlb', [DosenlbController::class, 'add']);
 Route::post('/tambah_dosenlb', [DosenlbController::class, 'insert']);
-Route::get('/edit_dosenlb/{id}', [DosenlbController::class, 'edit']);
+Route::get('/data_dosenlb/edit/{id}', [DosenlbController::class, 'edit']);
 Route::post('/data_dosenlb/update/{id}', [DosenlbController::class, 'update']);
 Route::get('/data_dosenlb/delete/{id}', [DosenlbController::class, 'delete']);
 Route::get('/view_dosenlb/{nip}', [DosenlbController::class, 'view']);

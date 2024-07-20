@@ -6,8 +6,4 @@
     <th></th>
 </tr>
 
-
-
-
-    
 @endsection

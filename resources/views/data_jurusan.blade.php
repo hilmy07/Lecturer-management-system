@@ -20,9 +20,6 @@
         <!-- /.box -->
 
         <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features</h3>
-          </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
@@ -45,7 +42,7 @@
                 <td>{{ $item -> fakultas -> nama_fakultas }}</td>
                 <td>{{ $item -> nama_jurusan }}</td>
                 <td>{{ $item -> keterangan }}</td>
-                
+
               <td>
                   <a href="/data_jurusan/edit{{ $item->id }}" class="btn btn-sm btn-warning">Edit</a>
               </td>
@@ -54,14 +51,14 @@
                   Delete
                 </button>
               </td>
-                
+
               </tr>
                 @endforeach
               </tbody>
             </table>
             @foreach ($dbjurusan as $data)
-      
-  
+
+
 
             <div class="modal modal-danger fade" id="delete{{ $data->id }}">
                 <div class="modal-dialog modal-sm">
@@ -96,6 +93,6 @@
   <!-- /.content -->
 
 
-    
+
 
   @endsection

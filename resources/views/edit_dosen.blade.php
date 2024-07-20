@@ -4,7 +4,6 @@
 @section('content')
 
 <form action="/data_dosen/update/{{ $data_dosen->id }}" method="POST">
-
     @csrf
     <div class="content">
         <div class="row">

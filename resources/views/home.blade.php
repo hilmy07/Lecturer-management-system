@@ -6,7 +6,6 @@
         <h1>Manajemen Data Dosen MKU - UPN Veteran Jawa Timur</h1> <br>
     </center>
 
-
     <div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
@@ -30,7 +29,6 @@
 
                 var options = {
                     title: 'Data Mata Kuliah Umum UPN Jawa Timur '
-
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -39,15 +37,12 @@
             }
         </script>
         </head>
-
         <body>
             <div id="piechart" style="width: 1257px; height: 500px;"></div>
     </div>
     <br>
     </br>
     <!-- Akhir Pie Chart -->
-
-
 
     <div class="info-box bg-yellow">
         <span class="info-box-icon"><i class="fa fa-calendar"></i></span>

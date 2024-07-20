@@ -20,10 +20,6 @@
         <!-- /.box -->
 
         <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features</h3>
-          </div>
-          <!-- /.box-header -->
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
@@ -52,13 +48,13 @@
                   </button>
                 {{-- <a href="" class="btn btn-sm btn-danger">Delete</a> --}}
                 </td>
-                
+
               </tr>
                 @endforeach
               </tbody>
             </table>
             @foreach ($dbfakultas as $item)
-      
+
             <div class="modal modal-danger fade" id="delete{{ $item->id }}">
                 <div class="modal-dialog modal-sm">
                   <div class="modal-content">
@@ -79,7 +75,7 @@
                 </div>
                   <!-- /.modal-dialog -->
             </div>
-  @endforeach 
+  @endforeach
           </div>
           <!-- /.box-body -->
         </div>
@@ -92,6 +88,6 @@
   <!-- /.content -->
 
 
-    
+
 
   @endsection
