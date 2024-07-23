@@ -17,7 +17,6 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -29,7 +28,6 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -41,7 +39,6 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -53,13 +50,11 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
                     <label for="">Jabatan</label>
                     <input type="text" id="jabatan" name="jabatan" class="form-control " value="{{ $data_dosen->jabatan }}" style="width: 100%;">
-
                 </div>
 
                 <div class="form-group">
@@ -71,7 +66,6 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -91,7 +85,6 @@
                     <label><input type="checkbox" name="mata_kuliah7" value="-Pendidikan Kewarganegaraan" @if(old('mata_kuliah7', $data_dosen->mata_kuliah7)) checked @endif  >Kewarganegaraan</label><br>
 
                     <label><input type="checkbox" name="mata_kuliah8" value="-Kepemimpinan" @if(old('mata_kuliah8', $data_dosen->mata_kuliah8)) checked @endif  >Kepemimpinan</label><br>
-
                 </div>
 
 
@@ -100,37 +93,26 @@
                     <!-- <input name="fakultas" class="form-control" value="{{ old('nama') }}"> -->
                     <select type="text" id="fakultas" name="fakultas" value="{{ $data_dosen->fakultas }}" class="form-control" style="width: 100%;">
 
-                      <option value="">- Pilih --</option>
-
                       @foreach ($dbfakultas as $item)
                       <option value="{{$item->id}}" {{$item->id == $data_dosen->id ? 'selected' : ''}} >{{$item->nama_fakultas}}</option>
                       @endforeach
-
-
                     </select>
-
-
 
                     <div class="text-danger">
                         @error('fakultas')
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
                     <label for="">Jurusan</label>
                     <!-- <input name="jurusan" class="form-control" value="{{ old('nama') }}"> -->
                     <select type="text" id="jurusan" name="jurusan" value="{{ $data_dosen->jurusan }}" class="form-control" style="width: 100%;">
-
                       <option value="">- Pilih --</option>
-
                       @foreach ($dbjurusan as $item)
                       <option value="{{$item->id}}" {{$item->id == $data_dosen->id ? 'selected' : ''}}>{{$item->nama_jurusan}}</option>
                       @endforeach
-
-
                     </select>
 
                     <div class="text-danger">
@@ -138,7 +120,6 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -150,19 +131,23 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
                     <label for="">Masukkan Foto Dosen</label>
                     <input name="foto_dosen" class="form-control" type="file">
 
+                    <div id="image-preview" style="margin-top: 10px;">
+                        @if($data_dosen->foto_dosen)
+                            <img src="{{ asset('foto_dosen/' . $data_dosen->foto_dosen) }}" alt="Foto Dosen" style="width: 250px; height: 250px; object-fit: cover;">
+                        @endif
+                    </div>
+
                     <div class="text-danger">
                         @error('foto_dosen')
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
 
@@ -175,21 +160,14 @@
                                 {{ $message }}
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
-
                     <button class="btn btn-primary btn-sm">Simpan</button>
-
                 </div>
-
-
             </div>
         </div>
     </div>
-
-
 </form>
 
 @endsection
@@ -199,6 +177,23 @@
 @endpush
 
 @push('scripts')
-$('.selectpicker').selectpicker();
     <script type="text/javascript" src="{{asset('front/select2/js/bootstrap-select.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle the file input change event
+            $('#foto_dosen').change(function() {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#image-preview').html('<img src="' + e.target.result +
+                        '" alt="Foto Dosen" object-fit: cover;">');
+                }
+
+                 reader.readAsDataURL(this.files[0]);
+            });
+
+            // Initialize selectpicker
+             $('.selectpicker').selectpicker();
+        });
+    </script>
 @endpush

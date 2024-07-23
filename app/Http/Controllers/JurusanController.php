@@ -18,17 +18,6 @@ class JurusanController extends Controller
     {
         $dbjurusan = Jurusan::all();
         return view('data_jurusan', compact('dbjurusan'));
-
-        // $data = [
-        //     'dbjurusan' => $this->Jurusan->allData(),
-        // ];
-
-        // $dbfakultas = Jurusan::with('fakultas')->get();
-
-        // return view('data_jurusan', $data)->with(compact('dbfakultas'));
-        
-       
-        
     }
 
     public function add()
@@ -43,7 +32,7 @@ class JurusanController extends Controller
             'kode_jurusan' => 'required|unique:dbjurusan,kode_jurusan|max:20',
             'nama_jurusan' => 'required',
             'pilih_fakultas' => 'required',
-            
+
             // 'keterangan' => 'required',
         ], [
             'kode_jurusan.required' => 'Kode jurusan wajib diisi',
@@ -59,7 +48,7 @@ class JurusanController extends Controller
             'nama_jurusan' => Request()->nama_jurusan,
             'pilih_fakultas' => Request()->pilih_fakultas,
             'keterangan' => Request()->keterangan,
-        
+
         ];
 
         $this->Jurusan->addData($data);
@@ -67,7 +56,7 @@ class JurusanController extends Controller
     }
 
     public function edit($id){
-        
+
 
         if (!$this->Jurusan->detailData($id)){
             abort(404);
@@ -86,7 +75,7 @@ class JurusanController extends Controller
             'kode_jurusan' => 'required|max:20',
             'nama_jurusan' => 'required',
             'pilih_fakultas' => 'required',
-            
+
             // 'keterangan' => 'required',
         ], [
             'kode_jurusan.required' => 'Kode jurusan wajib diisi',
@@ -102,7 +91,7 @@ class JurusanController extends Controller
             'nama_jurusan' => Request()->nama_jurusan,
             'pilih_fakultas' => Request()->pilih_fakultas,
             'keterangan' => Request()->keterangan,
-        
+
         ];
 
         $this->Jurusan->editData($id, $data);

@@ -3,7 +3,7 @@
 
 @section('content')
 <br>
-<a href="/tambah_dosenlb" class="btn btn-primary btn-sm">Add Data</a><br>
+<a href="/tambah_dosenlb" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Data</a><br>
 
 @if (session('pesan'))
 <div class="alert alert-success alert-dismissible">
@@ -27,7 +27,7 @@
               <table id="example" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Nama Lengkap</th>
                     <th>Gelar Depan</th>
                     <th>Gelar Belakang</th>
@@ -46,7 +46,7 @@
                 <tbody>
                   @foreach ($dbdosenlb as $data)
                   <tr>
-                    <td>{{ $data->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama }}</td>
                     <td>{{ $data->gelar_depan }}</td>
                     <td>{{ $data->gelar_belakang }}</td>
