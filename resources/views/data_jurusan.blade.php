@@ -3,7 +3,7 @@
 
 
 @section('content')
-<a href="/data_jurusan/add" class="btn btn-primary btn-sm">Add Data</a><br>
+<a href="/data_jurusan/add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Data</a><br>
 
 @if (session('pesan'))
 <div class="alert alert-success alert-dismissible">
