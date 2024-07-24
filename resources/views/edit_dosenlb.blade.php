@@ -2,7 +2,6 @@
 @section('title', 'Edit Dosen LB')
 
 @section('content')
-
     <form action="/data_dosenlb/update/{{ $data_dosenlb->id }}" method="POST">
         @csrf
         <div class="content">
@@ -18,7 +17,6 @@
                                 {{ $message }}
                             @enderror
                         </div>
-
                     </div>
 
                     <div class="form-group">
@@ -91,7 +89,8 @@
                             class="form-control" style="width: 100%;">
 
                             @foreach ($dbfakultas as $item)
-                                <option value="{{ $item->id }}" {{ $item->id == $data_dosenlb->id ? 'selected' : '' }}>
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $data_dosenlb->id ? 'selected' : '' }}>
                                     {{ $item->nama_fakultas }}</option>
                             @endforeach
                         </select>
@@ -110,7 +109,8 @@
                             class="form-control" style="width: 100%;">
                             <option value="">- Pilih --</option>
                             @foreach ($dbjurusan as $item)
-                                <option value="{{ $item->id }}" {{ $item->id == $data_dosenlb->id ? 'selected' : '' }}>
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $data_dosenlb->id ? 'selected' : '' }}>
                                     {{ $item->nama_jurusan }}</option>
                             @endforeach
                         </select>

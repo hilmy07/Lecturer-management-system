@@ -117,12 +117,10 @@
                     <!-- /.modal-dialog -->
                 </div>
             @endforeach
-
         </div>
         <!-- /.container -->
     </section>
     <!-- /.content -->
-
 @endsection
 
 @push('styles')

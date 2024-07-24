@@ -10,7 +10,14 @@ class Jurusan extends Model
 {
     protected $table = 'dbjurusan';
     protected $primaryKey = 'id';
-    
+
+    protected $fillable = [
+        'kode_jurusan',
+        'nama_jurusan',
+        'pilih_fakultas',
+        'keterangan',
+    ];
+
     public function fakultas(){
         return $this->belongsTo(Fakultas::class, 'pilih_fakultas');
     }
@@ -22,7 +29,7 @@ class Jurusan extends Model
     // public function dosen(){
     //     return $this->hasMany(Dosen::class,'nama','id');
     // }
-    
+
     public function allData()
     {
         return DB::table('dbjurusan')->get();
@@ -52,6 +59,4 @@ class Jurusan extends Model
         ->where('id', $id)
         ->delete();
     }
-
-    
 }

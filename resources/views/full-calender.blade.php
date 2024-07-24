@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>How to Use Fullcalendar in Laravel 8</title>
-    
+
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -13,20 +13,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
 </head>
 <body>
-  
+
 <div class="container">
     <br />
     <h1 class="text-center text-primary"><u>How to Use Fullcalendar in Laravel 8</u></h1>
     <br />
-
     <div id="calendar"></div>
-
 </div>
-   
+
 <script>
 
 $(document).ready(function () {
-
     $.ajaxSetup({
         headers:{
             'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
@@ -141,8 +138,6 @@ $(document).ready(function () {
     });
 
 });
-  
 </script>
-  
 </body>
 </html>

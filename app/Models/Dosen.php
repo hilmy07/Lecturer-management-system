@@ -51,7 +51,6 @@ class Dosen extends Model
     {
         DB::table('dbdosen')->insert($data);
     }
-
 }
 
 class Post extends Model

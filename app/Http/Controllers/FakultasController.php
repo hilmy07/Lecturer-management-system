@@ -2,112 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFakultasRequest;
+use App\Http\Requests\UpdateFakultasRequest;
 use Illuminate\Http\Request;
 use App\Models\Fakultas;
-use App\Models\Jurusan;
 
 class FakultasController extends Controller
 {
 
     public function __construct()
     {
-        $this->Fakultas = new Fakultas();
         $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
-        // $dbfakultas = Fakultas::all();
-        //     return view('tambah_fakultas',compact('dbfakultas'));
-            
-        // $data = [
-        //     'dbfakultas' => $this->Fakultas->allData(),
-        // ];
-        // return view('data_fakultas', $data);
-
         $dbfakultas = Fakultas::all();
         return view('data_fakultas', compact('dbfakultas'));
     }
 
-    public function detail($id)
+    public function show($id)
     {
-        $data = [
-            'dbfakultas' => $this->Fakultas->detailData($id),
-        ];
-        return view('detailfakultas', $data);
+        $dbfakultas = Fakultas::findOrFail($id);
+        return view('detailfakultas', compact('dbfakultas'));
     }
 
     public function add()
     {
-        $dbfakultas = Fakultas::all();
-            return view('tambah_fakultas',compact('dbfakultas'));
+        return view('tambah_fakultas');
     }
 
-    public function insert()
+    public function insert(StoreFakultasRequest $request)
     {
-        Request()->validate([
-            'kode_fakultas' => 'required|unique:dbfakultas,kode_fakultas|max:20',
-            'nama_fakultas' => 'required',
-            // 'keterangan' => 'required',
-        ], [
-            'kode_fakultas.required' => 'Kode Fakultas wajib diisi',
-            'kode_fakultas.unique' => 'Kode Fakultas ini telah digunakan',
-            'kode_fakultas.max' => 'Kode Fakultas terlalu panjang',
-            'nama_fakultas.required' => 'Nama Fakultas wajib diisi',
-            // 'keterangan.required' => 'Kode Fakultas wajib diisi',
-        ]);
+        $data = $request->validated();
 
-        $data = [
-            'kode_fakultas' => Request()->kode_fakultas,
-            'nama_fakultas' => Request()->nama_fakultas,
-            'keterangan' => Request()->keterangan,
-        
-        ];
+        Fakultas::create($data);
 
-        $this->Fakultas->addData($data);
         return redirect()->route('data_fakultas')->with('pesan', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
+        $data_fakultas = Fakultas::find($id);
 
-        if (!$this->Fakultas->detailData($id)){
+        if (!$data_fakultas) {
             abort(404);
         }
 
-        $data = [
-            'data_fakultas' => $this->Fakultas->detailData($id),
-        ];
-        return view('edit_fakultas', $data);
+        return view('edit_fakultas', compact('data_fakultas'));
     }
 
-    public function update($id)
+    public function update($id, UpdateFakultasRequest $request)
     {
-        Request()->validate([
-            'kode_fakultas' => 'required|max:20',
-            'nama_fakultas' => 'required',
-            // 'keterangan' => 'required',
-        ], [
-            'kode_fakultas.required' => 'Kode Fakultas wajib diisi',
-            'kode_fakultas.unique' => 'Kode Fakultas ini telah digunakan',
-            'kode_fakultas.max' => 'Kode Fakultas terlalu panjang',
-            'nama_fakultas.required' => 'Nama Fakultas wajib diisi',
-            // 'keterangan.required' => 'Kode Fakultas wajib diisi',
-        ]);
+        $data = $request->validated();
 
-        $data = [
-            'kode_fakultas' => Request()->kode_fakultas,
-            'nama_fakultas' => Request()->nama_fakultas,
-            'keterangan' => Request()->keterangan,
-        
-        ];
+        $fakultas = Fakultas::findOrFail($id);
+        $fakultas->update($data);
 
-        $this->Fakultas->editData($id, $data);
         return redirect()->route('data_fakultas')->with('pesan', 'Data Berhasil Diupdate');
     }
 
     public function delete($id)
     {
-        $this->Fakultas->deleteData($id);
+        $fakultas = Fakultas::findOrFail($id);
+        $fakultas->delete();
+
         return redirect()->route('data_fakultas')->with('pesan', 'Data Berhasil Dihapus');
     }
 }

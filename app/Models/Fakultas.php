@@ -10,8 +10,13 @@ class Fakultas extends Model
 {
     protected $table = 'dbfakultas';
     protected $primaryKey = 'id';
-    protected $fillable = ['id','nama_fakultas'];
-    
+
+    protected $fillable = [
+        'kode_fakultas',
+        'nama_fakultas',
+        'keterangan',
+    ];
+
     public function jurusan(){
         return $this->hasMany(Jurusan::class,'nama_jurusan','id');
     }
@@ -49,7 +54,4 @@ class Fakultas extends Model
         ->where('id', $id)
         ->delete();
     }
-    
-
-
 }

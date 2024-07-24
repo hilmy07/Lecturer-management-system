@@ -87,7 +87,6 @@
                     <label><input type="checkbox" name="mata_kuliah8" value="-Kepemimpinan" @if(old('mata_kuliah8', $data_dosen->mata_kuliah8)) checked @endif  >Kepemimpinan</label><br>
                 </div>
 
-
                 <div class="form-group">
                     <label for="">Fakultas</label>
                     <!-- <input name="fakultas" class="form-control" value="{{ old('nama') }}"> -->
@@ -150,7 +149,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label for="">Status</label>
                     <input type="text" id="status" name="status" class="form-control " value="{{ $data_dosen->status }}" style="width: 100%;">
@@ -161,7 +159,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group">
                     <button class="btn btn-primary btn-sm">Simpan</button>
                 </div>
@@ -169,7 +166,6 @@
         </div>
     </div>
 </form>
-
 @endsection
 
 @push('styles')

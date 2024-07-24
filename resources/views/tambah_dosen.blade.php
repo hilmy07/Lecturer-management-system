@@ -1,7 +1,6 @@
 @extends('layout.template_select')
 @section('title', 'Tambah Dosen')
 
-
 @section('content')
     <form action="/data_dosen/insert" method="POST" enctype="multipart/form-data">
         @csrf

@@ -55,7 +55,6 @@
                     <div class="form-group">
                         <label for="">Jabatan</label>
                         <input name="jabatan" class="form-control" value="{{ old('jabatan') }}">
-
                     </div>
 
                     <div class="form-group">
@@ -175,7 +174,6 @@
             </div>
         </div>
     </form>
-
 @endsection
 
 @push('styles')
